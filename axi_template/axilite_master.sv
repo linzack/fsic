@@ -18,7 +18,6 @@ module axilite_master(
     output logic [31:0] bk_rdata,
     output logic bk_rdone,
 
-
     // frontend - axilite master
     input axi_aclk,
     input axi_aresetn,
@@ -55,8 +54,6 @@ module axilite_master(
     logic [31:0] cache_wdata;
     logic [3:0]  cache_strb;
     logic cache_wstart, cache_rstart;
-
-
 
     // FSM state
     enum logic [2:0] {WR_WAIT_ADDR, WR_WRITE_ADDR, WR_WAIT_DATA, WR_WRITE_DATA} axi_wr_state, axi_wr_next_state;
@@ -158,7 +155,6 @@ module axilite_master(
         axi_arvalid = 1'b0;
         axi_araddr = 12'b0;
         axi_rready = 1'b0;
-        //rd_data_to_receive = 32'b0;
 
         case(axi_rd_state)
             //RD_WAIT_ADDR: // do nothing
@@ -172,7 +168,6 @@ module axilite_master(
             end
             RD_READ_DATA:begin
                 axi_rready = 1'b0;
-                //rd_data_to_receive = axi_rdata;
             end
             //default:
         endcase
