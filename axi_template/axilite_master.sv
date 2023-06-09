@@ -48,7 +48,6 @@ module axilite_master(
     // bk_rdata  _________________XX_____
     // bk_rdone  _________________/-\____
 
-    //logic wr_addr_go, wr_data_go, rd_addr_go, rd_data_go;
     logic wr_addr_go, rd_addr_go;
     logic [11:0] cache_waddr, cache_raddr;
     logic [31:0] cache_wdata;
