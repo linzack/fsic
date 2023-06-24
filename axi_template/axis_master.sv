@@ -6,7 +6,7 @@
 //      CREATED: 06/16/2023
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-module axis_fifo#(parameter WIDTH=8, DEPTH=8)(
+module axis_fifo#(WIDTH=8, DEPTH=8)(
     input clk,
     input rst_n,
     input wr_vld,
@@ -18,7 +18,7 @@ module axis_fifo#(parameter WIDTH=8, DEPTH=8)(
     output logic rd_vld
 );
 
-    logic [DEPTH - 1:0][WIDTH - 1:0] fifo;
+    logic [WIDTH - 1:0] fifo [DEPTH - 1:0];
     logic [7:0] wr_pointer, rd_pointer;
     logic [7:0] wr_count, rd_count;
     logic empty, full, sync_rd_vld;
