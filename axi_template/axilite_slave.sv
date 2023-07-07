@@ -18,22 +18,22 @@ module axilite_slave(
     output logic [31:0] axi_rdata,
 
     input axi_awvalid,
-    input [31:0] axi_awaddr,
+    input [11:0] axi_awaddr,
     input axi_wvalid,
     input [31:0] axi_wdata,
     input [3:0] axi_wstrb,
     input axi_arvalid,
-    input [31:0] axi_araddr,
+    input [11:0] axi_araddr,
     input axi_rready,
 
     // backend source to receive the axilite slave transaction
     output logic bk_wstart,
-    output logic [31:0] bk_waddr,
+    output logic [11:0] bk_waddr,
     output logic [31:0] bk_wdata,
     output logic [3:0]  bk_wstrb,
     //input bk_wdone,
     output logic bk_rstart,
-    output logic [31:0] bk_raddr,
+    output logic [11:0] bk_raddr,
     input [31:0] bk_rdata,
     input bk_rdone
 );
@@ -49,7 +49,7 @@ module axilite_slave(
     // bk_rdata  _________________XX_____
     // bk_rdone  _________________/-\____
 
-    logic [31:0] cache_waddr, cache_raddr;
+    logic [11:0] cache_waddr, cache_raddr;
     logic [31:0] cache_wdata, cache_rdata;
     logic [3:0]  cache_strb;
     logic cache_wstart, cache_rstart;
