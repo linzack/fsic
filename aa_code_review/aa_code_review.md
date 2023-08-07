@@ -1,27 +1,28 @@
-[[fsic]]
 
-aa block diagram
+
+aa block diagram  
+
 ![aa block diagram](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_block_diagram.png)
 
-aa fsm lm01
+aa fsm lm01  
 ![aa fsm LM01](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_fsm_01_lm1.png)
 
-aa fsm lm02
+aa fsm lm02  
 ![aa fsm lm02](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_fsm_02_lm2.png)
 
-aa fsm ls01
+aa fsm ls01  
 ![aa fsm ls01](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_fsm_05_ls1.png)
 
-aa fsm ls02
+aa fsm ls02  
 ![aa fsm ls02](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_fsm_06_ls2.png)
 
-aa fsm sm
+aa fsm sm  
 ![aa fsm sm](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_fsm_03_sm.png)
 
-aa fsm ss
+aa fsm ss  
 ![aa block diagram](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_fsm_04_ss.png)
 
-aa fsm control_logic
+aa fsm control_logic  
 ```verilog
     always_comb begin
         axi_next_state = axi_state;
@@ -62,8 +63,8 @@ aa fsm control_logic
     end
 ```
 
-aa datapath
+aa datapath  
 ![aa datapath](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_datapath.png)
 
-thank you!
+thank you!  
 ![aa datapath](https://tse2.mm.bing.net/th/id/OIG..rag.gH6yMz8.CZ_6xeV)
