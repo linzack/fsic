@@ -8,19 +8,28 @@
 ![fifo waveform 01](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_wv_fifo01.png)
 ## fifo waveform 02  
 ![fifo waveform 01](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_wv_fifo02.png)
-## aa fsm axil_m 01 77  
+## aa fsm axil_m 01  
 ![aa fsm LM01](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_fsm_01_lm1.png)
 
-## aa fsm axil_m 02 127  
+## aa fsm axil_m 02  
 ![aa fsm lm02](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_fsm_02_lm2.png)
 
-## aa fsm axis_m 204  
+## aa axil_m waveform  
+![axil_m waveform](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_wv_lm.png)
+
+## aa fsm axis_m  
 ![aa fsm sm](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_fsm_03_sm.png)
 
-## aa fsm axis_s 59  
-![aa block diagram](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_fsm_04_ss.png)
+## aa axis_m waveform  
+![](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_wv_sm.png)
 
-## aa fsm control_logic 119  
+## aa fsm axis_s  
+![aa block diagram](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_fsm_04_ss_01.png)
+
+## aa axis_s waveform  
+![](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_wv_ss.png)
+
+## aa fsm control_logic  
 ```verilog
     always_comb begin
         axi_next_state = axi_state;
@@ -66,5 +75,12 @@
 
 ## transaction between caravel and fpga  
 ![aa block diagram 02](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_block_diagram_02.png)
+
+## control_logic waveform 01  
+![control_logic waveform 01](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_wv_cl_01.png)
+
+## control_logic waveform 02  
+![control_logic waveform 02](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_wv_cl_02.png)
+
 ## thank you!  
-![aa datapath](https://tse2.mm.bing.net/th/id/OIG..rag.gH6yMz8.CZ_6xeV)
+![thank](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/thanks.png)
