@@ -14,12 +14,6 @@
 ## aa fsm axil_m 02 127  
 ![aa fsm lm02](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_fsm_02_lm2.png)
 
-## aa fsm axil_s 01 105  
-![aa fsm ls01](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_fsm_05_ls1.png)
-
-## aa fsm axil_s 02 162  
-![aa fsm ls02](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_fsm_06_ls2.png)
-
 ## aa fsm axis_m 204  
 ![aa fsm sm](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_fsm_03_sm.png)
 
