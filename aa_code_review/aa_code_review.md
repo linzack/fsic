@@ -57,9 +57,7 @@
                 else if(ls_wr_data_done || ss_wr_data_done)
                     axi_next_state = AXI_WAIT_DATA;
             AXI_SEND_BKEND:
-                if(sync_trig_int)
-                    axi_next_state = AXI_TRIG_INT;
-                else if(send_bk_done)
+                if(send_bk_done)
                     axi_next_state = AXI_WAIT_DATA;
             AXI_TRIG_INT:
                 if(axi_interrupt_done)
