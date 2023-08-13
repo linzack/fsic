@@ -1,28 +1,32 @@
 
-
-aa block diagram  
-
+# aa code review (2023/08/07)  
+## zack / fsic  
+## aa block diagram  
 ![aa block diagram](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_block_diagram.png)
 
-aa fsm lm01  
+## fifo waveform 01  
+![fifo waveform 01](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_wv_fifo01.png)
+## fifo waveform 02  
+![fifo waveform 01](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_wv_fifo02.png)
+## aa fsm axil_m 01 77  
 ![aa fsm LM01](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_fsm_01_lm1.png)
 
-aa fsm lm02  
+## aa fsm axil_m 02 127  
 ![aa fsm lm02](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_fsm_02_lm2.png)
 
-aa fsm ls01  
+## aa fsm axil_s 01 105  
 ![aa fsm ls01](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_fsm_05_ls1.png)
 
-aa fsm ls02  
+## aa fsm axil_s 02 162  
 ![aa fsm ls02](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_fsm_06_ls2.png)
 
-aa fsm sm  
+## aa fsm axis_m 204  
 ![aa fsm sm](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_fsm_03_sm.png)
 
-aa fsm ss  
+## aa fsm axis_s 59  
 ![aa block diagram](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_fsm_04_ss.png)
 
-aa fsm control_logic  
+## aa fsm control_logic 119  
 ```verilog
     always_comb begin
         axi_next_state = axi_state;
@@ -63,8 +67,10 @@ aa fsm control_logic
     end
 ```
 
-aa datapath  
+## aa datapath  
 ![aa datapath](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_datapath.png)
 
-thank you!  
+## transaction between caravel and fpga  
+![aa block diagram 02](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_block_diagram_02.png)
+## thank you!  
 ![aa datapath](https://tse2.mm.bing.net/th/id/OIG..rag.gH6yMz8.CZ_6xeV)
