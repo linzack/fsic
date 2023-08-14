@@ -525,6 +525,8 @@ module axi_ctrl_logic(
     end
     
     // get data from LS fifo
+    assign fifo_ls_clear = 1'b0;
+
     always_comb begin
         if(fifo_ls_data_out[FIFO_LS_WIDTH-1] == AXI_WR)
             {fifo_out_trans_typ, fifo_out_waddr, fifo_out_wdata, fifo_out_wstrb} = fifo_ls_data_out;
