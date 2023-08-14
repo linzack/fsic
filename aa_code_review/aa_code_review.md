@@ -60,9 +60,9 @@ if addr from s_axilite: # local access
         # In FPGA, PS/CPU can access user project, other module's MMIO, add base 0x30000000 and forward cycle to Configcontrol in Caravel.
         elif addr[14:0] in range(0x0000, 0x5FFF): 
             if read:
-                => read remote module MMIO, generate m_axis transaction with addr[14:0], [27:15] = 0b.
+                => read remote module MMIO, generate m_axis transaction with addr[14:0], [27:15] = 0b
             if write:
-                => write remote module MMIO, generate m_axis transaction with addr[14:0], [27:15] = 0b.
+                => write remote module MMIO, generate m_axis transaction with addr[14:0], [27:15] = 0b
         
 ​
 elif addr from s_axis: # remote access
@@ -72,7 +72,7 @@ elif addr from s_axis: # remote access
                 #if read: # no such case
                 if write:
                     => write mailbox, supported
-                    => raise interrupt if necessary
+                    => raise interrupt if enabled
             #else: # no such case
                 # if read:
                 # elif write:
@@ -82,7 +82,7 @@ elif addr from s_axis: # remote access
     elif addr[27:0] in range(0x000_0000, 0x000_5FFF):
 	    # Note: CC need 32bit address.
         if read:
-            => read remote module MMIO, generate m_axi transaction with addr + 0x3000_0000 to CC.
+            => read remote module MMIO, generate m_axi transaction with addr + 0x3000_0000 to CC
         if write:
             => write remote module MMIO, generate m_axi transaction with addr + 0x3000_0000 to CC
 ```
