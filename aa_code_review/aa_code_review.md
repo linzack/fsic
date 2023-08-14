@@ -87,6 +87,12 @@ elif addr from s_axis: # remote access
             => write remote module MMIO, generate m_axi transaction with addr + 0x3000_0000 to CC
 ```
 
+## aa datapath  
+![aa datapath](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_datapath.png)
+
+## transaction between caravel and fpga  
+![aa block diagram 02](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_block_diagram_02.png)
+
 ## aa fsm control_logic  
 ```verilog
     always_comb begin
@@ -125,12 +131,6 @@ elif addr from s_axis: # remote access
         endcase
     end
 ```
-
-## aa datapath  
-![aa datapath](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_datapath.png)
-
-## transaction between caravel and fpga  
-![aa block diagram 02](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_block_diagram_02.png)
 
 ## control_logic waveform 01  
 ![control_logic waveform 01](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_wv_cl_01.png)
