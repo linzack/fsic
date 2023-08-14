@@ -242,6 +242,7 @@ endmodule
         end
     end
 
+    parameter AXI_FIFO_DEPTH = 8'd8, AXI_FIFO_WIDTH = 8'd42
     axi_fifo #(.WIDTH(AXI_FIFO_WIDTH), .DEPTH(AXI_FIFO_DEPTH)) fifo(
         .clk(axi_aclk),
         .rst_n(axi_aresetn),
