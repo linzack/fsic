@@ -99,6 +99,7 @@ endmodule
 ///////////////////////////////////////////////////
 // LM
 ///////////////////////////////////////////////////
+    enum logic [2:0] {WR_WAIT_ADDR, WR_WRITE_ADDR, WR_WRITE_DATA} axi_wr_state, axi_wr_next_state;
     // FSM state, combinational logic
     always_comb begin
         axi_wr_next_state = axi_wr_state;
@@ -171,6 +172,117 @@ endmodule
         endcase
     end
 
+    // FSM state, combinational logic, axis, output control
+    always_comb begin
+        //axis_tvalid = 1'b0;
+        //axis_tdata = 32'h0;
+        //axis_tstrb = 4'h0;
+        //axis_tkeep = 4'h0;
+        //axis_tuser = 2'h0;
+        //next_data = 1'b0;
+
+        if(axis_state == AXIS_SEND_DATA && axis_next_state == AXIS_SEND_LAST && enough_data == 1'b1)begin // workaround for two cycle data
+            axis_tvalid = 1'b1;
+            axis_tdata = fifo_out_tdata;
+            axis_tstrb = fifo_out_tstrb;
+            axis_tkeep = fifo_out_tkeep;
+            axis_tuser = fifo_out_user;
+            if(axis_tready)begin
+                next_data = 1'b1;
+            end
+            else begin
+                next_data = 1'b0;
+            end
+        end
+        else if(axis_state == AXIS_SEND_DATA && axis_next_state == AXIS_SEND_LAST && enough_data == 1'b0)begin // workaround for one cycle data, do not drive bus
+            if(axis_tready)begin
+                next_data = 1'b1;
+            end
+            else begin
+                next_data = 1'b0;
+            end
+        end
+        else if(axis_state == AXIS_SEND_DATA)begin // normal data
+            axis_tvalid = 1'b1;
+            axis_tdata = fifo_out_tdata;
+...
+            axis_tuser = fifo_out_user;
+            if(axis_tready)begin
+                next_data = 1'b1;
+            end
+            else begin
+                next_data = 1'b0;
+            end
+        end
+        else if(axis_state == AXIS_SEND_LAST)begin // final data
+            axis_tvalid = 1'b1;
+            axis_tdata = fifo_out_tdata;
+...
+            next_data = 1'b0;
+        end
+        else begin
+            axis_tvalid = 1'b0;
+            axis_tdata = 32'h0;
+            axis_tstrb = 4'h0;
+            axis_tkeep = 4'h0;
+            axis_tuser = 2'h0;
+            next_data = 1'b0;
+        end
+    end
+
+    axi_fifo #(.WIDTH(AXI_FIFO_WIDTH), .DEPTH(AXI_FIFO_DEPTH)) fifo(
+        .clk(axi_aclk),
+        .rst_n(axi_aresetn),
+        .wr_vld(fifo_wr_vld),
+        .rd_rdy(fifo_rd_rdy),
+        .hack(1'b1),
+        .data_in(fifo_data_in),
+        .data_out(fifo_data_out),
+        .wr_rdy(fifo_wr_rdy),
+        .rd_vld(fifo_rd_vld),
+        .last(fifo_last),
+        .clear(fifo_clear));
+
+    // send backend data to fifo
+    always_comb begin
+        //fifo_data_in = '0;
+        //fifo_wr_vld = 1'b0;
+
+        if(bk_start)begin
+            fifo_data_in = {bk_data, bk_tstrb, bk_tkeep, bk_user};
+            fifo_wr_vld = 1'b1;
+        end
+        else begin
+            fifo_data_in = '0;
+            fifo_wr_vld = 1'b0;
+        end
+    end
+
+    // get data from fifo
+    always_comb begin
+        //{fifo_out_tdata, fifo_out_tstrb, fifo_out_tkeep, fifo_out_user} = '0;
+        //fifo_rd_rdy = 1'b0;
+        //fifo_clear = 1'b0;
+
+        if(axis_state == AXIS_SEND_DATA || axis_state == AXIS_SEND_LAST)begin
+            {fifo_out_tdata, fifo_out_tstrb, fifo_out_tkeep, fifo_out_user} = fifo_data_out;
+        end
+        else
+            {fifo_out_tdata, fifo_out_tstrb, fifo_out_tkeep, fifo_out_user} = '0;
+
+        if(next_data)begin // receive slave tready, can send next data
+            fifo_rd_rdy = 1'b1;
+        end
+        else
+            fifo_rd_rdy = 1'b0;
+
+        if(bk_done)begin // clear fifo when transaction done to fix bug
+            fifo_clear = 1'b1;
+        end
+        else
+            fifo_clear = 1'b0;
+    end
+
 ///////////////////////////////////////////////////
 // SS
 ///////////////////////////////////////////////////
@@ -183,16 +295,6 @@ endmodule
                 if(bk_ready && axis_tvalid)begin
                     axis_next_state = AXIS_OUTPUT_DATA;
                 end
-                //else if(bk_ready)begin
-                //    axis_next_state = AXIS_RECV_DATA;
-                //end
-            //AXIS_RECV_DATA:
-            //    if(bk_ready && axis_tvalid)begin
-            //        axis_next_state = AXIS_OUTPUT_DATA;
-            //    end
-            //    else begin
-            //        axis_next_state = AXIS_RECV_DATA;
-            //    end
             AXIS_OUTPUT_DATA:
                 if(axis_tvalid && bk_ready)begin
                     axis_next_state = AXIS_OUTPUT_DATA;

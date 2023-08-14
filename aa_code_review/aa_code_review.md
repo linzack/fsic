@@ -1,5 +1,5 @@
 
-# aa code review (2023/08/07)  
+# aa code review (2023/08/14)  
 ## zack / fsic  
 ## aa block diagram  
 ![aa block diagram](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_block_diagram.png)
