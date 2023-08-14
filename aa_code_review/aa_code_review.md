@@ -29,6 +29,64 @@
 ## aa axis_s waveform  
 ![](https://raw.githubusercontent.com/linzack/fsic/main/aa_code_review/code_review_aa_wv_ss.png)
 
+## aa fsm control_logic, pseudo code modified by Willy  
+```python
+if addr from s_axilite: # local access
+    if addr[14:0] in range(0x2000, 0x2FFF): # MB or AA
+        if addr[14:0] in range(0x2000, 0x20FF): # MB area
+            if addr[14:0] in range(0x2000, 0x201F): # supported range
+                if read:
+                    => read mailbox, supported
+                elif write:
+                    => write mailbox, supported
+                    => write mailbox at another side, generate m_axis transaction with addr[14:0], [27:15] = 0b.
+            else:
+                if read:
+                    => return 0xFFFFFFFF, unsupported
+                elif write:
+                    => ignore, unsupported
+        elif addr[14:0] in range(0x2100, 0x2FFF): # AA area
+            if addr[14:0] in range(0x2100, 0x2107): # supported range
+                if read:
+                    => read aa register, supported
+                elif write:
+                    => write aa register, supported
+            else:
+                if read:
+                    => return 0xFFFFFFFF, unsupported
+                elif write:
+                    => ignore, unsupported
+        # In Caravel, Configcontrol should not forward following below cycles to AA.
+        # In FPGA, PS/CPU can access user project, other module's MMIO, add base 0x30000000 and forward cycle to Configcontrol in Caravel.
+        elif addr[14:0] in range(0x0000, 0x5FFF): 
+            if read:
+                => read remote module MMIO, generate m_axis transaction with addr[14:0], [27:15] = 0b.
+            if write:
+                => write remote module MMIO, generate m_axis transaction with addr[14:0], [27:15] = 0b.
+        
+​
+elif addr from s_axis: # remote access
+    if addr[27:0] in range(0x000_2000, 0x000_2FFF): # MB or AA
+        if addr[27:0] in range(0x000_2000, 0x000_20FF): # MB area
+            if addr[27:0] in range(0x000_2000, 0x000_201F): # supported range
+                #if read: # no such case
+                if write:
+                    => write mailbox, supported
+                    => raise interrupt if necessary
+            #else: # no such case
+                # if read:
+                # elif write:
+        # elif addr[27:0] in range(0x000_2100, 0x000_2FFF): # AA area
+            # if read:# no such case
+            # elif write:# no such case
+    elif addr[27:0] in range(0x000_0000, 0x000_5FFF):
+	    # Note: CC need 32bit address.
+        if read:
+            => read remote module MMIO, generate m_axi transaction with addr + 0x3000_0000 to CC.
+        if write:
+            => write remote module MMIO, generate m_axi transaction with addr + 0x3000_0000 to CC
+```
+
 ## aa fsm control_logic  
 ```verilog
     always_comb begin
