@@ -1,12 +1,14 @@
-當 axi_state 從 AXI_WAIT_DATA -> AXI_DECIDE_DEST
-以及 fifo_out_tuser 從 0 -> 1
-這時 case(fifo_out_tuser) 
-看到的 fifo_out_tuser 是 0 還是 1？
-會不會因此 trigger default case (如果看到 0) 造成 do_nothing = 1
-
-do_nothing = 1 的話 下個 state 回到 WAIT 
-功能就會錯了
-
+當 axi_state 從 AXI_WAIT_DATA -> AXI_DECIDE_DEST  
+以及 fifo_out_tuser 從 0 -> 1  
+這時 case(fifo_out_tuser)  
+看到的 fifo_out_tuser 是 0 還是 1？  
+會不會因此 trigger default case (如果看到 0) 造成 do_nothing = 1  
+  
+do_nothing = 1 的話 下個 state 回到 WAIT  
+功能就會錯了  
+  
+目前做法是把case(fifo_out_tuser) 的 default case 拿掉  
+  
 ```verilog
 always_comb begin
     ...
@@ -40,3 +42,5 @@ always_comb begin
                         do_nothing = 1'b1;
                 endcase
 ```
+  
+![waveform](https://raw.githubusercontent.com/linzack/fsic/main/aa_bug_review/axi_ctrl_logic_bug_1.png)
